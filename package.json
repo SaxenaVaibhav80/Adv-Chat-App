@@ -1,0 +1,31 @@
+{
+  "name": "adv-chat-app",
+  "version": "1.0.0",
+  "description": "full real time chat app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaxenaVaibhav80/Adv-Chat-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaxenaVaibhav80/Adv-Chat-App/issues"
+  },
+  "homepage": "https://github.com/SaxenaVaibhav80/Adv-Chat-App#readme",
+  "devDependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.3",
+    "nodemon": "^3.1.7",
+    "web-push": "^3.6.7"
+  }
+}
