@@ -31,3 +31,62 @@ nav{
     color: white;
     font-weight: 600;
 }
+
+#main{
+    display: flex;
+    margin-top: 70px;
+    align-items: center;
+    justify-content:flex-end;
+    margin-right: 80px;
+} 
+
+#content {
+   
+    margin-right: 50px;
+
+    width: 30%;
+}
+
+.landingimg {
+    width: 771px;
+    height: 600px;
+}
+
+.content-head {
+    margin: 0;
+    font-size: 46px;
+    color: rgb(175 101 85);
+}
+.intro {
+    color: rgb(214 160 149);
+}
+
+.content-dis{
+    color:  rgb(122, 118, 118);;
+    line-height: 25px;
+}
+
+.explore{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+   
+    border-radius: 20px;
+    width:116px;
+    text-decoration: none;
+    padding: 10px 15px 10px 15px;
+    background-color: rgb(220 195 190);
+    color: white;
+    font-weight: 600;
+}
+.explorelink {
+    width: 116px;
+    display: flex;
+    text-decoration: none;
+}
+.explorelink:active{
+
+}
+.explorelink:visited{
+    
+}
