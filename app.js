@@ -27,7 +27,12 @@ app.use(express.json());
 
 app.get("/",(req,res)=>
 {
-    res.send("heyyy working")
+    res.render("landingPage")
 })
 
+
+app.get("/login",(req,res)=>
+{
+    res.render("login")
+})
 server.listen(8000)

@@ -1,0 +1,33 @@
+body{
+    margin:0;
+    font-family: "Open Sans", sans-serif;
+}
+
+nav{
+    margin-top: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#aboutlink,#contactlink,#loginlink,#signuplink{
+    color:  rgb(139 135 135);;
+    margin-right: 50px;
+    text-decoration: none;
+}
+
+#aboutlink,#contactlink,#loginlink,#signuplink:active{
+    color:  rgb(139 135 135);;
+}
+#aboutlink,#contactlink,#loginlink,#signuplink:visited{
+    color:  rgb(139 135 135);;
+}
+.logindiv {
+    border: 1px solid rgb(253, 224, 218);
+    padding: 10px 25px 10px 25px;
+    border-radius: 30px;
+    background-color: rgb(220 195 190);
+}
+#loginlink{
+    color: white;
+    font-weight: 600;
+}
