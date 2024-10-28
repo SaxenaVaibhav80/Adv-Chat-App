@@ -4,7 +4,8 @@
   "description": "full real time chat app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "start":"node app.js",
+   "dev":"nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,8 @@
     "mongoose": "^8.7.3",
     "nodemon": "^3.1.7",
     "web-push": "^3.6.7"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1"
   }
 }
