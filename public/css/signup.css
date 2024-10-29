@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: "Open Sans", sans-serif;
-    background: linear-gradient(135deg, #ecccc4, #626b9a);
+    background: linear-gradient(135deg, #ffffff, #c0a098);
 }
 
 #signupuser{
@@ -39,7 +39,7 @@ body {
     display: flex;
     align-items: center;
     /* background: #2F3A56; */
-    border: 1px solid #7d7d94;
+    border: 1px solid  #918983;
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 12px;
@@ -59,7 +59,7 @@ body {
 .options {
     display: flex;
     justify-content: space-between;
-    color: #46527f;
+    color:#918983;
     font-size: 12px;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -71,7 +71,7 @@ body {
 
 /* Login button */
 .signup-button {
-    background: #4c5d7c;
+    background-color: #918983;;
     color: white;
     border: none;
     padding: 10px 0;
@@ -86,15 +86,15 @@ body {
 }
 
 .forgotlink{
-    color: #46527f;
+    color:#918983;
     text-decoration: none;
 }
 .forgotlink:active{
-    color: #46527f;
+    color:#918983;
     text-decoration: none;
 }
 .forgotlink:visited{
-    color: #46527f;
+    color:#918983;
     text-decoration: none;
 }
 

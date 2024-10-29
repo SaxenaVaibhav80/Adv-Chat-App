@@ -1,6 +1,8 @@
 body{
     margin:0;
     font-family: "Open Sans", sans-serif;
+    background: linear-gradient(135deg, #ffffff, #f2d9d3);
+    height: 95.5vh;
 }
 
 nav{
@@ -37,7 +39,7 @@ nav{
     margin-top: 70px;
     align-items: center;
     justify-content:flex-end;
-    margin-right: 80px;
+    margin-right: 100px;
 } 
 
 #content {
@@ -48,7 +50,7 @@ nav{
 }
 
 .landingimg {
-    width: 771px;
+    width: 690px;
     height: 600px;
 }
 
