@@ -24,9 +24,44 @@ const json = require("body-parser/lib/types/json");
 app.set("view engine","ejs")
 app.use(express.static('public'))
 app.use(express.json());
-const public= ""
-const private =""
+const mongouri= process.env.URL
+const public= "BBXq7Er9eQirt4Q5UAoOT6jlbGe1coPPTSARDeOBur_CMV_pgn095iyHhmSvbZsNqfeN4vK-sum2bQ8jAIwY3oU"
+const private ="ZbndEMVQv8KKtr0vPFNyxvhQsIU7r4G3XSZBsbu5uyA"
 
+const conn = mongoose.createConnection(mongouri);
+
+let bucket;
+
+conn.once("open", () => {
+    console.log(conn.db)
+    bucket = new mongoose.mongo.GridFSBucket(conn.db, { bucketName: "uploads" });
+    console.log("GridFSBucket initialized");
+});
+
+
+const storage = new GridFsStorage({
+    url: mongouri,
+    options: { useNewUrlParser: true, useUnifiedTopology: true },
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                console.log("storage")
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString("hex") + path.extname(file.originalname);
+                const fileInfo = {
+                    user_id:user._id,
+                    filename: filename,
+                    bucketName: "uploads",
+                };
+                resolve(fileInfo);
+            });
+        });
+    },
+});
+
+const upload = multer({ storage });
 
 app.post("/signup",async(req,res)=>
     {
