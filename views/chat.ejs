@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/chat.css">
+    <link rel="icon" href="/img/favicon (2).ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+    <title>chat</title>
+</head>
+<body>
+        
+        <div class="msg-area">
+            <div class="setting-area">
+                <div>
+                    <a href="/logout" class="logout-link"><i class="fa fa-sign-out" aria-hidden="true" id="logout-img"></i></a>
+                    <a href="/adduser" class="add-user-link"><i class="fa fa-gear" aria-hidden="true" id="add-user" ></i></a>
+                </div>
+            </div>
+           
+            <div class="available-users">
+                <%console.log(user)%>
+               <% if(user){%>
+                    <% user.forEach((data)=> { %>
+                        <% if(data._id!=id){ %>     
+                            <div  class="users" data-id="<%=data._id%>">
+                                <div class="profile"><img src="/img/user.png" class="user-profile-pic"></div>
+                                <%=data.firstname+"  "+data.lastname%>
+                            </div>                    
+                        <%}%>
+                     <%})%>  
+                <%}else{%>
+                      <h3>Add friends</h3>
+                <%}%>
+                   
+            </div>
+           
+            <div>
+                <nav class="chat-nav">
+                    <div class="searchbar-div">
+                        <input class="searchbar" placeholder="search">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                    <div style="background-image: url(/img/user.png);" class="profilepic"></div>
+                </nav>
+                <div id="msg-box">
+                    
+        
+    
+                    
+                </div>
+                <div class="send-msg">
+                    <input type="text" id="message-input" placeholder="Type your message here" />
+                    <img src="/img/send (1).png" id="send-message-button" alt="send">
+                </div>
+            </div>
+        </div>
+<script src="/js/script.js"></script>
+</body>
+</html>

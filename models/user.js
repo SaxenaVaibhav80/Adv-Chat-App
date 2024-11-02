@@ -19,7 +19,13 @@ const userModel= new mongoose.Schema({
     password:{
         type: String,
         required: true
-    }
+    },
+    friends:[{
+      userid:{
+        type: String
+      }
+    }],
+    profilePictureId: { type: String } 
 })
 
 const User = mongoose.model("User", userModel);

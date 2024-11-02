@@ -58,7 +58,7 @@ const storage = new GridFsStorage({
 
                 const filename = buf.toString("hex") + path.extname(file.originalname);
                 const fileInfo = {
-                    metadata:{user_id:req.user.id},
+                    metadata:{user_id:req.user.id,type:req.user.type},
                     filename: filename,
                     bucketName: "uploads",
                 };
@@ -95,7 +95,7 @@ app.post("/signup",async(req,res)=>
             firstname:fname,
             lastname:lname,
             password:encpass,
-            Email:email
+            email:email
         })
       
      }
@@ -119,6 +119,25 @@ app.post("/login/api",(req,res)=>
         
     })
 
+
+// AUTH middleware-->
+const  auth =(req,res,next)=>
+  {
+      const tokenFromCookie= req.cookies.token
+      try{
+          if(tokenFromCookie)
+          {
+              const verification =jwt.verify(tokenFromCookie,secret_key)
+              next()
+          }
+          else{
+              res.redirect("/")
+          }
+      }catch(err){
+          res.redirect("/")
+      }
+  
+  }
 // longin handler----->
 
 app.post("/login",async(req,res)=>
@@ -143,7 +162,7 @@ app.post("/login",async(req,res)=>
                     httpOnly:true
                 };
                 res.status(200).cookie("token",token,options)
-                res.redirect("/")
+                res.redirect("/chats")
             }
             else{
                 res.status(400).send("password incorrect")
@@ -175,22 +194,26 @@ const checkLoginState = (req, res, next) => {
 
 // uploading handler---->
 
-app.post("/upload", (req, res) => {
-    const token=req.cookies.token
-    if(token)
-    {
-        const verify = jwt.verify(token,secret_key)
-        const id = verify.id
-    }
-    req.user = {id:id}; 
+app.post("/chats", async(req, res) => {
+  const token = req.cookies.token;
+  if (token) {
+      const verify = jwt.verify(token, secret_key);
+      const id = verify.id;
+      req.user = { id: id, type: "profile" }; 
 
-    upload.single("file")(req, res, (err) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.redirect("/");
-    });
+      upload.single("file")(req, res, (err) => {
+          if (err) {
+              return res.status(500).json({ error: err.message });
+          }
+
+          console.log(req.user.id);
+          res.redirect("/chats");
+      });
+  } else {
+      res.redirect("/login");
+  }
 });
+
 
 // handling subscribe post request--->
 
@@ -313,17 +336,44 @@ io.on("connection", (socket) => {
 
 // landing page Route-->
 
-app.get("/",(req,res)=>
+app.get("/",checkLoginState,(req,res)=>
 {
     res.render("landingPage")
 })
 
 // chat route page---->
 
-app.get("/chat",(req,res)=>
-{
-    res.render("/chat")
-})
+  app.get("/chats", auth, async (req, res) => {
+    const token = req.cookies.token;
+  
+    try {
+      if (token) {
+        
+        const verification = jwt.verify(token, secret_key);
+  
+        if (verification) {
+          const user = await userModel.findOne({ _id: verification.id });
+          
+          if (user && user.friends.length > 0) {
+          
+            const friendIds = user.friends.map(friend => friend.userid);
+  
+            const friends = await userModel.find({ _id: { $in: friendIds } });
+  
+            res.render("chat", { user: friends, id: verification.id });
+          } else {
+            res.render("chat", { user: [], id: verification.id });
+          }
+        }
+      } else {
+        res.render("chat", { user: [], id: null });
+      }
+    } catch (err) {
+      console.error(err);
+      res.render("chat", { user: [], id: null });
+    }
+  });
+
 
 // signup route--->
 
@@ -338,4 +388,27 @@ app.get("/login",(req,res)=>
 {
     res.render("login")
 })
+
+app.get("/logout",async(req,res)=>
+  {
+      const token=req.cookies.token
+      if(token)
+      { 
+        const verification = jwt.verify(token, secret_key);
+        const id = verification.id;
+        const user = await userModel.findOne({ _id: id });
+    
+        if (user) {
+          const users=await userModel.findOneAndUpdate(
+            { _id: id },
+            { subscription: null },
+            { new: true }
+          );
+          res.cookie('token', token, { expires: new Date(0), httpOnly: true });
+      }
+      res.cookie('token', token, { expires: new Date(0), httpOnly: true });
+      res.redirect("/")
+  }
+  })
+  
 server.listen(8000)
