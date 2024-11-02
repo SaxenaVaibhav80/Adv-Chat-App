@@ -18,8 +18,8 @@
                     <div id="setting"><i class="fa fa-gear" aria-hidden="true" ></i></div>
                 </div>
                 <div class="setting-option">
-                    <div class="S-option delete-user"><p>Delete Account</p></div>
-                   <div class="S-option security">Security</div>
+                    <a href="/delete-user" class="delete-user-link"><div class="S-option delete-user"><p>Delete Account</p></div></a>
+                   <a href="/security" class="security-link"><div class="S-option security">Security</div></a>
                 </div>
             </div>
            
@@ -52,7 +52,7 @@
                     <div style="background-image: url(/img/user.png);" class="profilepic"></div>
                     
                     <div class="profile-option">
-                        <div class="option view-profile"><p>view profile</p></div>
+                        <a class="profile-view-link" href="/view-profile"><div class="option view-profile"><p>view profile</p></div></a>
                         <a class="profile-logout-link" href="/logout"><div class="option logout">Logout <i class="fas fa-arrow-right"></i></div></a>
                     </div>
                 </nav>
