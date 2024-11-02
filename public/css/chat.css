@@ -175,12 +175,10 @@ p{
     font-size: 74px;
  }
 
- .add-user-link, .add-user{
+
+#setting{
+    margin-top: 10px;
     color: white;
-    margin-top: 10px;
- }
-#add-user{
-    margin-top: 10px;
 }
  #logout-img{
     color: white;
@@ -242,12 +240,13 @@ p{
     width: 160px;
     height: 115x;
     top: 84px;
-   border-radius:15px
+    border-radius:15px
 }
 .option{
     padding: 10px 15px 10px 15px;
     border-bottom: 1px solid black;
     background-color: rgb(230 233 233);
+    cursor: pointer;
 }
 .profile-option >:first-child
 {   
@@ -255,13 +254,10 @@ p{
     border-top-left-radius: 14px;
     
 }
-.profile-option >:last-child{
-    border-bottom-right-radius: 14px;
-    border-bottom-left-radius: 14px;
-    background-color: black;
-    color: white;
-}
 
+.hidden{
+    display: none;
+}
 #request{
     margin-right: 25px;
 }
@@ -276,4 +272,62 @@ p{
     font-size: 10px;
     padding: 2px 5px;
     text-align: center;
+}
+.profile-option{
+    display: none 
+}
+.setting-option{
+    display: none;
+}
+.visible{
+    display: block;
+}
+
+.profile-logout-link{
+    text-decoration: none;
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    background-color: black;
+    color: white;
+}
+.logout{
+    text-decoration: none;
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    background-color: black;
+    color: white;
+}
+.send-msg{
+    display: none;
+}
+
+.setting-option {
+    border: 1px solid black;
+    position: absolute;
+    width: 160px;
+    height: 115x;
+    top: 89%;
+    left: 4%;
+    border-radius: 15px;
+   
+}
+
+.S-option{
+    padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid black;
+    background-color: rgb(230 233 233);
+    cursor: pointer;
+}
+
+.setting-option >:first-child
+{   
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    
+}
+.setting-option >:last-child
+{   
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    
 }

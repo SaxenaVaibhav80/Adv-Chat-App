@@ -94,7 +94,10 @@ fetch('/login/api', {
         const sendMessageButton = document.getElementById('send-message-button');
         sendMessageButton.addEventListener('click', async () => {
             const message = messageInput.value;
-        
+            if(selectedUserId)
+            {
+                document.getElementsByClassName("send-msg").classList.add("visible")
+            }
             if (selectedUserId && message) {
                 socket.emit('sendMessageToUser', { userId: selectedUserId, message });
                 console.log("Sending message");
@@ -178,10 +181,31 @@ fetch('/login/api', {
     console.error('Error fetching token:', error);
 });
 
+const profile_option_element = document.getElementsByClassName("profile-option")[0]
+const profile_element = document.getElementsByClassName("profilepic")[0]
+const setting = document.getElementById("setting")
+console.log(setting)
+const setting_option= document.getElementsByClassName("setting-option")[0]
+console.log(setting_option)
 
-    
+profile_element.addEventListener("click",()=>
+{
+    profile_option_element.classList.add("visible")
+   
+})
+
+setting.addEventListener("click",()=>
+{
+    setting_option.classList.add("visible")
+})
 
 
+const touch_element_to_remove=document.getElementById("msg-box")
 
+touch_element_to_remove.addEventListener("click",()=>
+{
+    profile_option_element.classList.remove("visible")
+    setting_option.classList.remove("visible")
+})
 
 

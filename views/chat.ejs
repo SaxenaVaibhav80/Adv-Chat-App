@@ -15,7 +15,11 @@
             <div class="setting-area">
                 <div>
                     <a href="/logout" class="logout-link"><i class="fa fa-sign-out" aria-hidden="true" id="logout-img"></i></a>
-                    <a href="/adduser" class="add-user-link"><i class="fa fa-gear" aria-hidden="true" id="add-user" ></i></a>
+                    <div id="setting"><i class="fa fa-gear" aria-hidden="true" ></i></div>
+                </div>
+                <div class="setting-option">
+                    <div class="S-option delete-user"><p>Delete Account</p></div>
+                   <div class="S-option security">Security</div>
                 </div>
             </div>
            
@@ -49,8 +53,7 @@
                     
                     <div class="profile-option">
                         <div class="option view-profile"><p>view profile</p></div>
-                        <div class="option edit-profile"><p>Edit profile</p></div>
-                        <div class="option logout">Logout <i class="fas fa-arrow-right"></i></div>
+                        <a class="profile-logout-link" href="/logout"><div class="option logout">Logout <i class="fas fa-arrow-right"></i></div></a>
                     </div>
                 </nav>
                 <div id="msg-box">

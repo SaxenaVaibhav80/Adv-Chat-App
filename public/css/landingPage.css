@@ -10,8 +10,10 @@ nav{
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-right: 40px;
 }
-#aboutlink,#contactlink,#loginlink,#signuplink{
+
+#aboutlink,#contactlink,#loginlink,#signuplink,#chat{
     color:  rgb(139 135 135);;
     margin-right: 50px;
     text-decoration: none;
@@ -92,4 +94,6 @@ nav{
 .explorelink:visited{
     
 }
+
+
 
