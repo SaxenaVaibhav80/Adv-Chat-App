@@ -362,15 +362,15 @@ app.get("/",checkLoginState,(req,res)=>
   
             res.render("chat", { user: friends, id: verification.id });
           } else {
-            res.render("chat", { user: [], id: verification.id });
+            res.render("chat", { user: 0, id: verification.id });
           }
         }
       } else {
-        res.render("chat", { user: [], id: null });
+        res.render("chat", { user: 0, id: null });
       }
     } catch (err) {
       console.error(err);
-      res.render("chat", { user: [], id: null });
+      res.render("chat", { user: 0, id: null });
     }
   });
 

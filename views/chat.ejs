@@ -31,24 +31,29 @@
                         <%}%>
                      <%})%>  
                 <%}else{%>
-                      <h3>Add friends</h3>
+                      <img src="/img/search-user.png" class="search-user-img">
+                      <h4 class="adding-instruction">Bring friends, boost the vibes!</h4>
                 <%}%>
                    
             </div>
            
             <div>
                 <nav class="chat-nav">
+                    <i class="fa fa-user-plus" id="request"></i>
                     <div class="searchbar-div">
                         <input class="searchbar" placeholder="search">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </div>
                     <div style="background-image: url(/img/user.png);" class="profilepic"></div>
+                    
+                    <div class="profile-option">
+                        <div class="option view-profile"><p>view profile</p></div>
+                        <div class="option edit-profile"><p>Edit profile</p></div>
+                        <div class="option logout">Logout <i class="fas fa-arrow-right"></i></div>
+                    </div>
                 </nav>
                 <div id="msg-box">
-                    
-        
-    
-                    
+                 
                 </div>
                 <div class="send-msg">
                     <input type="text" id="message-input" placeholder="Type your message here" />
@@ -59,3 +64,8 @@
 <script src="/js/script.js"></script>
 </body>
 </html>
+
+
+
+
+
