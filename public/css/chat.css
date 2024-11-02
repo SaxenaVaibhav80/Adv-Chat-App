@@ -240,22 +240,40 @@ p{
     border: 1px solid black;
     position: absolute;
     width: 160px;
-    height: 120px;
+    height: 115x;
     top: 84px;
    border-radius:15px
 }
 .option{
     padding: 10px 15px 10px 15px;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgb(230 233 233);
+}
+.profile-option >:first-child
+{   
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    
 }
 .profile-option >:last-child{
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    background-color: black;
+    color: white;
 }
-.profile-option >:first-child{
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
-}
+
 #request{
     margin-right: 25px;
+}
+.count-request {
+    position: absolute;
+    border: 1px solid #373131;
+    background-color: #373131;
+    color: white;
+    border-radius: 27px;
+    right: 354px;
+    top: 4%;
+    font-size: 10px;
+    padding: 2px 5px;
+    text-align: center;
 }
