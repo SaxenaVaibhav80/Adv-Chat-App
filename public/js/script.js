@@ -208,4 +208,45 @@ touch_element_to_remove.addEventListener("click",()=>
     setting_option.classList.remove("visible")
 })
 
+const searchInput = document.getElementById("searchbar")
+const userdiv= document.getElementById("user-list")
 
+async function showuser(items)
+{
+    console.log(items)
+    if(!items.length)
+    {  
+        userdiv.classList.remove("show")
+        userdiv.classList.add("hidden")
+    }else{
+        userdiv.classList.add("show")
+        userdiv.innerHTML = "";
+       items.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item.username;
+        userdiv.appendChild(li);
+    });
+    }
+}
+
+async  function filtersuggest()
+{
+
+    let res =[]
+    const response = await fetch("/alluser",{
+        method:"POST"
+    })
+    const users = await response.json()
+    let values = searchInput.value
+    if (values.length === 0) {
+        userdiv.innerHTML = ""; 
+        console.log("No input; cleared results");
+        showuser([])
+       
+    }
+    else{
+        res = users.filter(user => user.username.toLowerCase().includes(values.toLowerCase()));
+        showuser(res)
+    }
+}
+searchInput.addEventListener("keyup",filtersuggest)

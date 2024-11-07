@@ -24,13 +24,12 @@
             </div>
            
             <div class="available-users">
-                <%console.log(user)%>
                <% if(user){%>
                     <% user.forEach((data)=> { %>
                         <% if(data._id!=id){ %>     
                             <div  class="users" data-id="<%=data._id%>">
                                 <div class="profile"><img src="/img/user.png" class="user-profile-pic"></div>
-                                <%=data.firstname+"  "+data.lastname%>
+                                <%=data.username%>
                             </div>                    
                         <%}%>
                      <%})%>  
@@ -46,8 +45,11 @@
                     <i class="fa fa-user-plus" id="request"></i>
                     <div class="count-request">1</div>
                     <div class="searchbar-div">
-                        <input class="searchbar" placeholder="search">
+                        <input id="searchbar" placeholder="search">
                         <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                    <div id="user-list">
+        
                     </div>
                     <div style="background-image: url(/img/user.png);" class="profilepic"></div>
                     

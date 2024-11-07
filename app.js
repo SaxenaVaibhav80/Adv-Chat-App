@@ -74,26 +74,26 @@ const upload = multer({ storage });
 
 app.post("/signup",async(req,res)=>
     {
-     const fname= req.body.fname
-     const lname= req.body.lname
+     const username= req.body.username
      const password= req.body.password
      const email=req.body.email
     
-    console.log(fname,lname,password,email)
-     if(!(fname && lname && email && password))
+    console.log(username,password,email)
+     if(!(username && email && password))
      {
          res.status(400).send("all field are required")
      }
      const exist = await userModel.findOne({email:email})
-     if(exist){
+     const userexist = await userModel.findOne({username:username})
+     if(exist || userexist){
          res.status(401).send("user already exist")
      }
      else{
 
         const encpass= await bcrypt.hash(password,10)
         const user = await userModel.create({
-            firstname:fname,
-            lastname:lname,
+           
+            username:username,
             password:encpass,
             email:email
         })
@@ -205,8 +205,6 @@ app.post("/chats", async(req, res) => {
           if (err) {
               return res.status(500).json({ error: err.message });
           }
-
-          console.log(req.user.id);
           res.redirect("/chats");
       });
   } else {
@@ -334,6 +332,27 @@ io.on("connection", (socket) => {
     });
 });
 
+
+//getting all user--->
+app.post("/alluser",async(req,res)=>
+{
+   const token = req.cookies.token
+
+    if(token)
+    {
+      try{
+        const verify = jwt.verify(token,secret_key)
+        const id= verify.id
+
+        const users = await userModel.find()
+        res.json(users);
+      }catch(err)
+      {
+        console.log("pls relogin")
+      }
+      
+    }
+})
 // landing page Route-->
 
 app.get("/",checkLoginState,(req,res)=>

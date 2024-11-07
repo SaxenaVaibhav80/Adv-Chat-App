@@ -225,7 +225,7 @@ p{
     height: 32px;
     border-radius: 50px;
 }
-.searchbar {
+#searchbar {
     background-color: none;
     outline: none;
     width: 85%;
@@ -342,4 +342,14 @@ p{
     border-bottom-left-radius: 14px;
     background-color: rgb(200 203 203);
     color: rgb(49, 48, 48)
+}
+.show {
+    display: block;
+    border: 1px solid black;
+    width: 100px;
+    padding: 20px;
+    background-color: rgb(199, 192, 192);
+    position: absolute;
+    top: 54px;
+    right: 140px;
 }
