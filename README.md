@@ -29,16 +29,6 @@ Real-time Communication: Socket.io
 Authentication: JSON Web Tokens (JWT)
 File Handling: Multer, GridFS
 Frontend Templating: EJS
-Project Structure
-plaintext
-
-
-├── models           # Mongoose models (User, Message, etc.)
-├── public           # Static files (CSS, images, etc.)
-├── routes           # Express routes (auth, chat, file uploads)
-├── views            # EJS templates for rendering pages
-├── app.js           # Main application file
-└── README.md        # Project documentation
 
 Installation
 Clone the repository:
