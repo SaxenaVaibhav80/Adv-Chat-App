@@ -88,6 +88,7 @@ fetch('/login/api', {
                 socket.emit("load chat", selectedUserId);
                 document.getElementsByClassName("send-msg")[0].classList.add("visible-flex")
                 console.log(`User selected: ${selectedUserId}`);
+               
             });
         });
         
@@ -139,8 +140,6 @@ fetch('/login/api', {
             
             if (selectedUserId === message[1]) {
                 messageBox.appendChild(messageElement);
-            } else {
-                // notification will be added soon
             }
         });
         
