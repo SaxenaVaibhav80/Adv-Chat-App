@@ -7,20 +7,22 @@ body{
     display: flex;
     
 }
-.users{
+.users {
     cursor: pointer;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgb(32, 44, 51) ;
+    border-bottom: 1px solid rgb(195 195 195);
+    color: #4e4949;
 }
 p{
     margin: 0;
 }
 
-.users:hover{
-    background-color:  rgb(32, 44, 51);
+.users:hover {
+    background-color: rgb(85 85 86);
+    color: white;
 }
 
 #usernotify{
@@ -127,6 +129,9 @@ p{
     align-items: center;
     box-shadow: 0 -8px 6px -2px rgba(0, 0, 0, 0.1);
 }
+.send-msg{
+    display: none;
+}
 
 .usertext{
     background-color: rgb(230 233 233);
@@ -167,14 +172,13 @@ p{
     background: #555; 
 
   }
- .startchat{
-    color: white;
+.startchat {
+    color: #6a6a6a;
     margin-left: 219px;
     margin-top: 430px;
     opacity: 0.5;
     font-size: 74px;
- }
-
+}
 
 #setting{
     margin-top: 10px;
@@ -279,6 +283,11 @@ p{
 .visible{
     display: block;
 }
+.visible-flex{
+
+    display: flex;
+}
+
 
 .profile-logout-link{
     text-decoration: none;
@@ -302,9 +311,7 @@ p{
     background-color: black;
     color: white;
 }
-.send-msg{
-    display: none;
-}
+
 
 .setting-option {
     border: 1px solid black;
@@ -345,11 +352,51 @@ p{
 }
 .show {
     display: block;
-    border: 1px solid black;
-    width: 100px;
-    padding: 20px;
-    background-color: rgb(199, 192, 192);
+    min-width: 300px;
     position: absolute;
+    border-radius: 10px;
     top: 54px;
-    right: 140px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    right: 50px;
+}
+.decor-div {
+    padding: 15px 0px 15px 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(230, 233, 233);
+}
+
+.decor-div:last-child{
+    border-radius: 0px 0px 10px 10px ;
+}
+
+.profile-picture,.profile{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+.user-profile-pic{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+.margin-left{
+    margin-left: 20px;
+}
+.request {
+    cursor: pointer;
+    padding: 5px;
+    color: white;
+    background-color: #c3c3c3;
+    border-radius: 8px;
+    position: fixed;
+    right: 65px;
+    font-size: 14px;
 }

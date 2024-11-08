@@ -86,6 +86,7 @@ fetch('/login/api', {
             item.addEventListener('click', () => {
                 selectedUserId = item.getAttribute('data-id'); 
                 socket.emit("load chat", selectedUserId);
+                document.getElementsByClassName("send-msg")[0].classList.add("visible-flex")
                 console.log(`User selected: ${selectedUserId}`);
             });
         });
@@ -94,10 +95,7 @@ fetch('/login/api', {
         const sendMessageButton = document.getElementById('send-message-button');
         sendMessageButton.addEventListener('click', async () => {
             const message = messageInput.value;
-            if(selectedUserId)
-            {
-                document.getElementsByClassName("send-msg").classList.add("visible")
-            }
+
             if (selectedUserId && message) {
                 socket.emit('sendMessageToUser', { userId: selectedUserId, message });
                 console.log("Sending message");
@@ -168,6 +166,7 @@ fetch('/login/api', {
                     const messageElement = document.createElement('div');
                     messageElement.classList.add("startchat");
                     messageElement.textContent = "Start Conversations";
+                    console.log(messageBox)
                     messageBox.appendChild(messageElement);
                 }
             } catch (err) {
@@ -208,45 +207,85 @@ touch_element_to_remove.addEventListener("click",()=>
     setting_option.classList.remove("visible")
 })
 
-const searchInput = document.getElementById("searchbar")
-const userdiv= document.getElementById("user-list")
+const searchInput = document.getElementById("searchbar");
+const userdiv = document.getElementById("user-list");
 
-async function showuser(items)
-{
-    console.log(items)
-    if(!items.length)
-    {  
-        userdiv.classList.remove("show")
-        userdiv.classList.add("hidden")
-    }else{
-        userdiv.classList.add("show")
+
+async function getFriends() {
+    const response = await fetch("/frds", { method: "POST" });
+    const friends = await response.json();
+    return friends.map(friend => friend.userid); 
+}
+
+
+async function showuser(items) {
+    const friendIds = await getFriends();
+
+    if (!items.length) {
+        userdiv.classList.remove("show");
+        userdiv.classList.add("hidden");
+    } else {
+        userdiv.classList.add("show");
         userdiv.innerHTML = "";
-       items.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item.username;
-        userdiv.appendChild(li);
-    });
+
+        items.forEach(user => {
+            const div = document.createElement("div");
+            const p = document.createElement("p");
+            const addOrRemove = document.createElement("div");
+
+            addOrRemove.textContent = friendIds.includes(user._id) ? "Remove" : "Add user"; 
+            addOrRemove.classList.add("request");
+            p.classList.add("margin-left");
+
+            const divImg = document.createElement("div");
+            divImg.classList.add("profile-picture");
+
+            const img = document.createElement("img");
+            img.setAttribute("src", "/img/user (1).png");
+            divImg.appendChild(img);
+
+            div.classList.add("decor-div");
+            p.textContent = user.username;
+
+            userdiv.appendChild(div);
+            div.appendChild(divImg);
+            div.appendChild(p);
+            div.append(addOrRemove);
+
+           addOrRemove.addEventListener("click", () => {
+                const isFriend = friendIds.includes(user._id);
+                fetch(isFriend ? "/removeFriend" : "/addasfrd", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ friendId: user._id })
+                }).then(() => {
+                    addOrRemove.textContent = isFriend ? "Add user" : "Remove"; 
+                    if (isFriend) {
+                        friendIds.splice(friendIds.indexOf(user._id), 1); 
+                    } else {
+                        friendIds.push(user._id);
+                    }
+                });
+                //reload the page
+                location.reload();
+            });
+        });
     }
 }
 
-async  function filtersuggest()
-{
 
-    let res =[]
-    const response = await fetch("/alluser",{
-        method:"POST"
-    })
-    const users = await response.json()
-    let values = searchInput.value
-    if (values.length === 0) {
-        userdiv.innerHTML = ""; 
-        console.log("No input; cleared results");
-        showuser([])
-       
-    }
-    else{
-        res = users.filter(user => user.username.toLowerCase().includes(values.toLowerCase()));
-        showuser(res)
+async function filtersuggest() {
+    const response = await fetch("/alluser", { method: "POST" });
+    const users = await response.json();
+    const value = searchInput.value;
+
+    if (value.length === 0) {
+        userdiv.innerHTML = "";
+        showuser([]);
+    } else {
+        const res = users.filter(user => user.username.toLowerCase().includes(value.toLowerCase()));
+        showuser(res);
     }
 }
-searchInput.addEventListener("keyup",filtersuggest)
+
+searchInput.addEventListener("keyup", filtersuggest);

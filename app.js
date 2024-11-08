@@ -214,7 +214,7 @@ app.post("/chats", async(req, res) => {
 
 
 // handling subscribe post request--->
-
+webpush.setVapidDetails("mailto:vaibhavsaxena599@gmail.com",public,private)
 app.post("/subscribe", async (req, res) => {
  
     const subscription=req.body.sub
@@ -320,6 +320,7 @@ io.on("connection", (socket) => {
                 if (loadchat) {
                     socket.emit("Load msg", loadchat.message);
                 } else {
+                   
                     socket.emit("Load msg", "start chat");
                 }
             });
@@ -330,6 +331,31 @@ io.on("connection", (socket) => {
         socket.emit("offline", "offline");
       }
     });
+});
+
+//adding friend-->
+app.post("/addasfrd", async (req, res) => {
+  const token = req.cookies.token;
+
+  if (token) {
+      try {
+          const verify = jwt.verify(token, secret_key);
+          const userId = verify.id;
+          const friendId = req.body.friendId;
+          const user = await userModel.find({_id:userId})
+          const updatedUser = await userModel.findByIdAndUpdate(
+              userId,
+              { $addToSet: { friends: { userid: friendId } } },
+              { new: true }
+          );
+          res.status(200).json({ message:user});
+      } catch (err) {
+          console.log(err);
+          res.status(401).json({ message: "Invalid token. Please log in again." });
+      }
+  } else {
+      res.status(401).json({ message: "No token found. Please log in." });
+  }
 });
 
 
@@ -343,8 +369,7 @@ app.post("/alluser",async(req,res)=>
       try{
         const verify = jwt.verify(token,secret_key)
         const id= verify.id
-
-        const users = await userModel.find()
+        const users = await userModel.find({}, "username");
         res.json(users);
       }catch(err)
       {
@@ -352,7 +377,54 @@ app.post("/alluser",async(req,res)=>
       }
       
     }
+   
 })
+
+//removing friend--->
+app.post("/removeFriend", async (req, res) => {
+  const token = req.cookies.token;
+
+  if (token) {
+      try {
+          const verify = jwt.verify(token, secret_key);
+          const userId = verify.id;
+          const friendId = req.body.friendId;
+
+          await userModel.findByIdAndUpdate(userId, {
+              $pull: { friends: { userid: friendId } } // Remove friend from friends list
+          });
+
+          res.status(200).json({ message: "Friend removed successfully" });
+      } catch (err) {
+          console.log(err);
+          res.status(401).json({ message: "Invalid token. Please log in again." });
+      }
+  } else {
+      res.status(401).json({ message: "No token found. Please log in." });
+  }
+});
+
+
+//sending friends--->
+app.post("/frds",async(req,res)=>
+  {
+     const token = req.cookies.token
+  
+      if(token)
+      {
+        try{
+          const verify = jwt.verify(token,secret_key)
+          const id= verify.id
+          const users= await userModel.findOne({_id:id})
+          res.status(200).json(users.friends)
+        }catch(err)
+        {
+          console.log("pls relogin")
+        }
+        
+      }
+  })
+  
 // landing page Route-->
 
 app.get("/",checkLoginState,(req,res)=>
